@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" /> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="text-center">
+            <h1 class="text-center">News App building with Django by <a href="https://www.facebook.com/ahmedfathhy011/">ME</a></h1>
+        <hr />
+        </div>
+        
+        <div>
+            <h1>Our Categories</h1>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=health">Health</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=science">Science</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=sports">Sports</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=technology">Technology</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=entertainment">Entertainment</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=business">Business</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?category-search=general">General</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h1>News for Countries</h1>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=eg">Egypt</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=us">USA</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=gb">UK</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=de">Germany</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=fr">France</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=it">Italy</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=in">India</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=au">Australia</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=ca">Canada</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=ru">Russia</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=tr">Turkey</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=ae">United Arab Emirates</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=za">South Africa</a></li>
+                <li class="list-group-item"><a href="{% url 'index' %}?country-search=kr">South Korea</a></li>
+            </ul>
+        </div>
+
+        <!-- <div class="search">
+            <form action="" method="GET">
+                <input type="text" name="country-search" placeholder="Search by country.." />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+            <form action="" method="GET">
+                <input type="text" name="category-search" placeholder="Search by category.." />
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div> -->
+        <br>
+        <br>
+        {% for news in articles %}
+        <div class="card-columns">
+            <div class="card">
+                <a href="{{news.urlToImage}}">
+                    <img class="card-img-top"
+                        src="{{ news.urlToImage }}"
+                        alt="Card image cap"
+                    />
+                </a>
+                <div class="card-body">
+                    <a href="#">
+                        <h5 class="card-title"><a href="{{news.url}}">{{ news.title }}</a></h5>
+                    </a>
+                    <p>
+                        {{ news.description }} <a target="_blank" href="{{news.url}}">Read More</a>
+                    </p>
+                    <p>
+                        <small class="text-muted">Published at: <strong>{{ news.publishedAt }}</strong></small>
+                    </p>
+                    <p>
+                        by: <strong>{{ news.author }}</strong>
+                    </p>
+                    <p>
+                        Source: <a href="{{news.url}}">{{ news.source.name }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
